@@ -1,16 +1,21 @@
-# infren
+## Flutter Intermediate
 
-A new Flutter project.
+* 코드 팩토리
+  * 기본 UI 작업하기
+  * Authentication (인증 시스템)
+  * Pagination (페이지네이션)
+  * 데이터 모델링
+  * RestaurantDetailScreen 작업하기
+  * JsonSerializable과 Retrofit 그리고 Dio Interceptor
+  * Riverpod을 이용한 상태관리
+  * 상태관리 프로젝트에 적용하기
+  * 캐시관리 및 공유하기
+  * Pagination 일반화하기
+  * 고급 캐시관리
+  * GoRouter 이론
+  * GoRouter 프로젝트에 적용하기
+  * Optimistic Response
+  * 장바구니 스크린
+  * 주문 탭
+  * Debounce와 Throttle
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
