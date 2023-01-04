@@ -12,7 +12,7 @@
   * Riverpod을 이용한 상태관리 ✔️
   * 상태관리 프로젝트에 적용하기 ✔️
   * 캐시관리 및 공유하기 ✔️
-  * Pagination 일반화하기
+  * Pagination 일반화하기 ✔️
   * 고급 캐시관리
   * GoRouter 이론
   * GoRouter 프로젝트에 적용하기
