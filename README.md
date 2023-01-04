@@ -14,7 +14,7 @@
   * 캐시관리 및 공유하기 ✔️
   * Pagination 일반화하기 ✔️
   * 고급 캐시관리 ✔️
-  * GoRouter 이론
+  * GoRouter 이론 ✔️
   * GoRouter 프로젝트에 적용하기
   * Optimistic Response
   * 장바구니 스크린
