@@ -4,10 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:infren/common/const/data.dart';
 import 'package:infren/common/dio/dio.dart';
 import 'package:infren/common/model/cursor_pagination_model.dart';
+import 'package:infren/common/utils/pagination_utils.dart';
 import 'package:infren/restaurant/component/restaurant_card.dart';
-import 'package:infren/restaurant/model/restaurant_model.dart';
 import 'package:infren/restaurant/provider/restaurant_provider.dart';
-import 'package:infren/restaurant/repository/restaurant_repository.dart';
 import 'package:infren/restaurant/view/restaurant_detail__screen.dart';
 
 class RestaurantScreen extends ConsumerStatefulWidget {
@@ -27,14 +26,20 @@ class _RestaurantScreenState extends ConsumerState<RestaurantScreen> {
   }
 
   void scrollListener() {
+    PaginationUtils.paginate(
+      controller: controller,
+      provider: ref.read(
+        restaurantProvider.notifier,
+      ),
+    );
     // 현재위치가 최대 길이보다 조금 덜 되는 위치까지 왔다면
     // 새로운 데이터를 추가 요청
     // 현재 스크롤이 내려갈 수 있는 최대 길이 - 300픽셀
-    if (controller.offset > controller.position.maxScrollExtent - 300) {
-      ref.read(restaurantProvider.notifier).paginate(
-            fetchMore: true,
-          );
-    }
+    // if (controller.offset > controller.position.maxScrollExtent - 300) {
+    //   ref.read(restaurantProvider.notifier).paginate(
+    //         fetchMore: true,
+    //       );
+    // }
   }
 
   @override
