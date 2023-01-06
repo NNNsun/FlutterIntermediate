@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:infren/common/component/custom_text_form_field.dart';
+import 'package:infren/common/provider/go_router.dart';
+import 'package:infren/user/provider/auth_provider.dart';
 import 'package:infren/user/view/login_screen.dart';
-import 'package:infren/user/view/splash_screen.dart';
 
 void main() {
   runApp(ProviderScope(
@@ -10,18 +10,21 @@ void main() {
   ));
 }
 
-class _App extends StatelessWidget {
+class _App extends ConsumerWidget {
   const _App({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final router = ref.watch(routerProvider);
+    return MaterialApp.router(
       // 기본 폰트 모두 'NotoSans'로 변경
       theme: ThemeData(
         fontFamily: 'NotoSans',
       ),
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      routerDelegate: router.routerDelegate,
+      routeInformationParser: router.routeInformationParser,
+      routeInformationProvider: router.routeInformationProvider,
     );
   }
 }

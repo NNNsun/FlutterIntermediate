@@ -10,7 +10,7 @@ final emulatorIp = '10.0.2.2:3000';
 final simulatorIp = '127.0.0.1:3000';
 final doitIp = '172.30.1.59:3000';
 final homeIp = '192.168.25.37:3000';
-final yuIP = '192.168.0.26:3000';
+final yuIP = '165.229.75.129:3000';
 
 final androidIp = homeIp;
 final ip = Platform.isIOS ? simulatorIp : androidIp;

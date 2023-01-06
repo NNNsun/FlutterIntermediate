@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:infren/common/component/custom_text_form_field.dart';
 import 'package:infren/common/component/secure_storage/secure_storage.dart';
 import 'package:infren/common/const/colors.dart';
@@ -11,6 +10,7 @@ import 'package:infren/common/layout/default_layout.dart';
 import 'package:infren/common/view/root_tab.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
+  static String get routeName => 'login';
   const LoginScreen({super.key});
 
   @override
