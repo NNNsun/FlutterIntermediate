@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:infren/common/component/secure_storage/secure_storage.dart';
 import 'package:infren/common/const/colors.dart';
 import 'package:infren/common/const/data.dart';
@@ -9,7 +10,7 @@ import 'package:infren/common/view/root_tab.dart';
 import 'package:infren/user/view/login_screen.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
-  static String get routeName => '/splash';
+  static String get routeName => 'splash';
   const SplashScreen({super.key});
 
   @override
@@ -48,20 +49,22 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 
       await storage.write(
           key: ACCESS_TOKEN_KEY, value: resp.data['accessToken']);
-
-      Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(
-          builder: (_) => RootTab(),
-        ),
-        (route) => false,
-      );
+      context.goNamed('home');
+      // Navigator.of(context).pushAndRemoveUntil(
+      //   MaterialPageRoute(
+      //     builder: (_) => RootTab(),
+      //   ),
+      //   (route) => false,
+      // );
     } catch (e) {
-      Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(
-          builder: (_) => LoginScreen(),
-        ),
-        (route) => false,
-      );
+      print('[ERR] $e');
+      context.goNamed('splash');
+      // Navigator.of(context).pushAndRemoveUntil(
+      //   MaterialPageRoute(
+      //     builder: (_) => LoginScreen(),
+      //   ),
+      //   (route) => false,
+      // );
     }
   }
 

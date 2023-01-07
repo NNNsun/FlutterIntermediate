@@ -3,21 +3,26 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:infren/common/component/secure_storage/secure_storage.dart';
 import 'package:infren/common/const/data.dart';
+import 'package:infren/user/provider/user_me_provider.dart';
 
 final dioProvider = Provider<Dio>((ref) {
   final dio = Dio();
   final storage = ref.watch(secureStorageProvider); //provider안에 provider 사용
   dio.interceptors.add(
-    CustomInterceptor(storage: storage),
+    CustomInterceptor(
+      storage: storage,
+      ref: ref,
+    ),
   );
   return dio;
 });
 
 class CustomInterceptor extends Interceptor {
   final FlutterSecureStorage storage;
-
+  final Ref ref;
   CustomInterceptor({
     required this.storage,
+    required this.ref,
   });
 
   // 1. 요청을 보낼때
@@ -111,6 +116,17 @@ class CustomInterceptor extends Interceptor {
         return handler.resolve(response); //response: 새로 보낸 요청
       } on DioError catch (err) {
         // DioError만 잡는다
+
+        // circular dependency error
+        // A, B
+        // A->B의 친구
+        // B->A의 친구
+        // A는 B의 친구구나
+        // A-> B-> A -> B -> A -> B
+        // userMeProvider는 dio가 필요
+        // dio는 userMe Provider가 필요 =>circular dependency error
+        // => 상위에 객체 하나 더 만들기
+        ref.read(userMeProvider.notifier).logout();
         return handler.reject(err);
       }
     }

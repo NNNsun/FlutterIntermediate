@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:infren/common/provider/go_router.dart';
-import 'package:infren/user/provider/auth_provider.dart';
-import 'package:infren/user/view/login_screen.dart';
 
 void main() {
-  runApp(ProviderScope(
+  runApp(const ProviderScope(
     child: _App(),
   ));
 }

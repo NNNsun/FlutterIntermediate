@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:infren/common/view/root_tab.dart';
@@ -25,21 +25,23 @@ class AuthProvider extends ChangeNotifier {
     });
   }
 
-  List<GoRoute> get ruoutes => [
+  List<GoRoute> get routes => [
         GoRoute(
-            // path == 서버 구조와 같음
-            path: '/restaurant',
-            name: RootTab.routeName,
-            builder: (_, __) => RootTab(),
-            routes: [
-              GoRoute(
-                path: 'restaurant/:rid',
-                name: RootTab.routeName,
-                builder: (_, state) => RestaurantDetailScreen(
-                  id: state.params['rid']!,
-                ),
+          // path == 서버 구조와 같음
+          path: '/',
+          name: RootTab.routeName,
+          builder: (_, __) => RootTab(),
+          routes: [
+            GoRoute(
+              //server path와 동일하게
+              path: 'restaurant/:rid',
+              name: RestaurantDetailScreen.routeName,
+              builder: (_, state) => RestaurantDetailScreen(
+                id: state.params['rid']!,
               ),
-            ]),
+            ),
+          ],
+        ),
         GoRoute(
           path: '/splash',
           name: SplashScreen.routeName,
@@ -51,6 +53,9 @@ class AuthProvider extends ChangeNotifier {
           builder: (_, __) => LoginScreen(),
         ),
       ];
+  void logout() {
+    ref.read(authProvider.notifier).logout();
+  }
 
   // SplashScreen
   // 앱을 처음 시작했을 때
@@ -58,13 +63,13 @@ class AuthProvider extends ChangeNotifier {
   // 홈 스크린으로 보내줄지 확인하는 과정이 필요!
   String? redirectLogic(GoRouterState state) {
     final UserModelBase? user = ref.read(userMeProvider);
-    final logginIn = state.location == '/login';
+    final loginIn = state.location == '/login';
 
     // 유저 정보가 없는데
     // 로그인중이면 그대로 로그인 페이지에 두고
     // 만약 로그인중이 아니라면 로그인 페이지로 이동
     if (user == null) {
-      return logginIn ? null : '/login';
+      return loginIn ? null : '/login';
     }
     // user가 null이 아님
 
@@ -73,12 +78,12 @@ class AuthProvider extends ChangeNotifier {
     // 로그인 중이거나현재 위치가 SplashScreen이면
     // 홈으로 이동
     if (user is UserModel) {
-      return logginIn || state.location == '/splash' ? '/' : null;
+      return loginIn || state.location == '/splash' ? '/' : null;
     }
 
     //UserModelError 일때
     if (user is UserModelError) {
-      return !logginIn ? '/login' : null;
+      return !loginIn ? '/login' : null;
     }
     return null;
   }

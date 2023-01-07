@@ -56,14 +56,8 @@ class UserMeSateNotifier extends StateNotifier<UserModelBase?> {
         password: password,
       );
 
-      await storage.write(
-        key: REFRESH_TOKEN_KEY,
-        value: resp.refreshToken,
-      );
-      await storage.write(
-        key: ACCESS_TOKEN_KEY,
-        value: resp.accessToken,
-      );
+      await storage.write(key: REFRESH_TOKEN_KEY, value: resp.refreshToken);
+      await storage.write(key: ACCESS_TOKEN_KEY, value: resp.accessToken);
       // 토큰에 해당하는 유저를 기억한다
       final userResp = await repository.getMe();
 
