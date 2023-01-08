@@ -8,6 +8,7 @@ import 'package:infren/common/utils/data_utils.dart';
 
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
   final dio = ref.watch(dioProvider);
+
   return AuthRepository(baseUrl: 'http://$ip/auth', dio: dio);
 });
 
@@ -27,10 +28,15 @@ class AuthRepository {
   }) async {
     final serialized = DataUtils.plainToBase64('$username:$password');
 
-    final resp = await dio.post('$baseUrl/login',
-        options: Options(headers: {
+    final resp = await dio.post(
+      '$baseUrl/login',
+      options: Options(
+        headers: {
           'authorization': 'Basic $serialized',
-        }));
+        },
+      ),
+    );
+
     return LoginResponse.fromJson(
       resp.data,
     );
@@ -39,10 +45,13 @@ class AuthRepository {
   Future<TokenResponse> token() async {
     final resp = await dio.post(
       '$baseUrl/token',
-      options: Options(headers: {
-        'refreshToken': 'true',
-      }),
+      options: Options(
+        headers: {
+          'refreshToken': 'true',
+        },
+      ),
     );
+
     return TokenResponse.fromJson(resp.data);
   }
 }

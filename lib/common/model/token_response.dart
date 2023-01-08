@@ -5,6 +5,7 @@ part 'token_response.g.dart';
 @JsonSerializable()
 class TokenResponse {
   final String accessToken;
+
   TokenResponse({
     required this.accessToken,
   });

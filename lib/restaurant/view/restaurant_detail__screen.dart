@@ -4,6 +4,7 @@ import 'package:infren/common/layout/default_layout.dart';
 import 'package:infren/common/model/cursor_pagination_model.dart';
 import 'package:infren/common/utils/pagination_utils.dart';
 import 'package:infren/product/component/product_card.dart';
+import 'package:infren/product/model/product_model.dart';
 import 'package:infren/rating/component/rating_card.dart';
 import 'package:infren/rating/model/rating_model.dart';
 import 'package:infren/restaurant/component/restaurant_card.dart';
@@ -11,12 +12,16 @@ import 'package:infren/restaurant/model/restaurant_detail_model.dart';
 import 'package:infren/restaurant/model/restaurant_model.dart';
 import 'package:infren/restaurant/provider/restaurant_provider.dart';
 import 'package:infren/restaurant/provider/restaurant_rating_provider.dart';
+import 'package:infren/user/provider/basket_provider.dart';
 import 'package:skeletons/skeletons.dart';
 
 class RestaurantDetailScreen extends ConsumerStatefulWidget {
   static String get routeName => 'restaurantDetail';
   final String id;
-  const RestaurantDetailScreen({required this.id, super.key});
+  const RestaurantDetailScreen({
+    required this.id,
+    super.key,
+  });
 
   @override
   ConsumerState<RestaurantDetailScreen> createState() =>
@@ -71,7 +76,10 @@ class _RestaurantDetailScreenState
           if (state is! RestaurantDetailModel) renderLoading(),
           if (state is RestaurantDetailModel) renderLabel(),
           if (state is RestaurantDetailModel)
-            renderProduct(products: state.products),
+            renderProduct(
+              products: state.products,
+              restaurant: state,
+            ),
           if (ratingsState is CursorPagination<RatingModel>)
             renderRatings(
               models: ratingsState.data,
@@ -110,8 +118,10 @@ class _RestaurantDetailScreenState
             (index) => Padding(
               padding: const EdgeInsets.only(bottom: 32.0),
               child: SkeletonParagraph(
-                style:
-                    SkeletonParagraphStyle(lines: 5, padding: EdgeInsets.zero),
+                style: SkeletonParagraphStyle(
+                  lines: 5,
+                  padding: EdgeInsets.zero,
+                ),
               ),
             ),
           ),
@@ -133,6 +143,7 @@ class _RestaurantDetailScreenState
   }
 
   SliverPadding renderProduct({
+    required RestaurantModel restaurant,
     required List<RestaurantProductModel> products,
   }) {
     return SliverPadding(
@@ -141,10 +152,25 @@ class _RestaurantDetailScreenState
         delegate: SliverChildBuilderDelegate(
           (context, index) {
             final model = products[index];
-            return Padding(
-              padding: const EdgeInsets.only(top: 16.0),
-              child: ProductCard.fromRestaurantProductModel(
-                model: model,
+
+            return InkWell(
+              onTap: () {
+                ref.read(basketProvider.notifier).addToBasket(
+                      product: ProductModel(
+                        id: model.id,
+                        name: model.name,
+                        detail: model.detail,
+                        imgUrl: model.imgUrl,
+                        price: model.price,
+                        restaurant: restaurant,
+                      ),
+                    );
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(top: 16.0),
+                child: ProductCard.fromRestaurantProductModel(
+                  model: model,
+                ),
               ),
             );
           },

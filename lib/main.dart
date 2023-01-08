@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:infren/common/provider/go_router.dart';
 
 void main() {
-  runApp(const ProviderScope(
+  runApp(ProviderScope(
     child: _App(),
   ));
 }
@@ -20,9 +20,7 @@ class _App extends ConsumerWidget {
         fontFamily: 'NotoSans',
       ),
       debugShowCheckedModeBanner: false,
-      routerDelegate: router.routerDelegate,
-      routeInformationParser: router.routeInformationParser,
-      routeInformationProvider: router.routeInformationProvider,
+      routerConfig: router,
     );
   }
 }

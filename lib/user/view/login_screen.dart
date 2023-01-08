@@ -1,17 +1,16 @@
 import 'dart:convert';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:infren/common/component/custom_text_form_field.dart';
-import 'package:infren/common/component/secure_storage/secure_storage.dart';
 import 'package:infren/common/const/colors.dart';
-import 'package:infren/common/const/data.dart';
 import 'package:infren/common/layout/default_layout.dart';
-import 'package:infren/common/view/root_tab.dart';
+import 'package:infren/user/model/user_model.dart';
+import 'package:infren/user/provider/user_me_provider.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   static String get routeName => 'login';
-  const LoginScreen({super.key});
+
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
   ConsumerState<LoginScreen> createState() => _LoginScreenState();
@@ -23,7 +22,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final dio = Dio();
+    final state = ref.watch(userMeProvider);
+
     return DefaultLayout(
       child: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -36,9 +36,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 _Title(),
-                const SizedBox(
-                  height: 16.0,
-                ),
+                const SizedBox(height: 16.0),
                 _SubTitle(),
                 Image.asset(
                   'asset/img/misc/logo.png',
@@ -50,9 +48,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     username = value;
                   },
                 ),
-                const SizedBox(
-                  height: 16.0,
-                ),
+                const SizedBox(height: 16.0),
                 CustomTextFormField(
                   hintText: '비밀번호를 입력해주세요.',
                   onChanged: (String value) {
@@ -60,55 +56,62 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   },
                   obscureText: true,
                 ),
-                const SizedBox(
-                  height: 16.0,
-                ),
+                const SizedBox(height: 16.0),
                 ElevatedButton(
-                  onPressed: () async {
-                    // ID : 비밀번호
-                    final rawString = '$username:$password';
-                    // base64 encoding, input value=String output value=String, 일반화
-                    Codec<String, String> stringToBase64 = utf8.fuse(base64);
-                    //인코딩 정의
-                    String token = stringToBase64.encode(rawString);
-                    final resp = await dio.post(
-                      'http://$ip/auth/login',
-                      options: Options(
-                        headers: {
-                          //무조건 한칸 띄움
-                          'authorization': 'Basic $token',
+                  onPressed: state is UserModelLoading
+                      ? null
+                      : () async {
+                          ref.read(userMeProvider.notifier).login(
+                                username: username,
+                                password: password,
+                              );
+
+                          // ID:비밀번호
+                          // final rawString = '$username:$password';
+                          //
+                          // Codec<String, String> stringToBase64 = utf8.fuse(base64);
+                          //
+                          // String token = stringToBase64.encode(rawString);
+                          //
+                          // final resp = await dio.post(
+                          //   'http://$ip/auth/login',
+                          //   options: Options(
+                          //     headers: {
+                          //       'authorization': 'Basic $token',
+                          //     },
+                          //   ),
+                          // );
+                          //
+                          // final refreshToken = resp.data['refreshToken'];
+                          // final accessToken = resp.data['accessToken'];
+                          //
+                          // final storage = ref.read(secureStorageProvider);
+                          //
+                          // await storage.write(key: REFRESH_TOKEN_KEY, value: refreshToken);
+                          // await storage.write(key: ACCESS_TOKEN_KEY, value: accessToken);
+                          //
+                          // Navigator.of(context).push(
+                          //   MaterialPageRoute(
+                          //     builder: (_) => RootTab(),
+                          //   ),
+                          // );
                         },
-                      ),
-                    );
-                    print(resp.data);
-
-                    final refreshToken = resp.data['refreshToken'];
-                    final accessToken = resp.data['accessToken'];
-
-                    final storage = ref.read(secureStorageProvider);
-
-                    await storage.write(
-                        key: REFRESH_TOKEN_KEY, value: refreshToken);
-                    await storage.write(
-                        key: ACCESS_TOKEN_KEY, value: accessToken);
-
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (_) => RootTab(),
-                      ),
-                    );
-                  },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: PRIMARY_COLOR,
+                    primary: PRIMARY_COLOR,
                   ),
-                  child: Text('로그인'),
+                  child: Text(
+                    '로그인',
+                  ),
                 ),
                 TextButton(
-                    onPressed: () async {},
-                    style: TextButton.styleFrom(foregroundColor: Colors.black),
-                    child: Text(
-                      '회원가입',
-                    )),
+                  onPressed: () async {},
+                  style: TextButton.styleFrom(
+                    primary: Colors.black,
+                  ),
+                  child: Text(
+                    '회원가입',
+                  ),
+                ),
               ],
             ),
           ),
@@ -119,7 +122,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 }
 
 class _Title extends StatelessWidget {
-  const _Title({super.key});
+  const _Title({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +138,7 @@ class _Title extends StatelessWidget {
 }
 
 class _SubTitle extends StatelessWidget {
-  const _SubTitle({super.key});
+  const _SubTitle({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

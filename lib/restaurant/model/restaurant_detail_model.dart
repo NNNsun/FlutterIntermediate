@@ -31,7 +31,9 @@ class RestaurantDetailModel extends RestaurantModel {
 class RestaurantProductModel {
   final String id;
   final String name;
-  @JsonKey(fromJson: DataUtils.pathToUrl)
+  @JsonKey(
+    fromJson: DataUtils.pathToUrl,
+  )
   final String imgUrl;
   final String detail;
   final int price;
@@ -43,6 +45,7 @@ class RestaurantProductModel {
     required this.detail,
     required this.price,
   });
+
   factory RestaurantProductModel.fromJson(Map<String, dynamic> json) =>
       _$RestaurantProductModelFromJson(json);
 }

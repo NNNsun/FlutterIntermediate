@@ -6,10 +6,12 @@ abstract class CursorPaginationBase {}
 
 class CursorPaginationError extends CursorPaginationBase {
   final String message;
-  CursorPaginationError({required this.message});
+
+  CursorPaginationError({
+    required this.message,
+  });
 }
 
-//OOP, data가 CursorPaginationLading의 인스턴스인지가 중요
 class CursorPaginationLoading extends CursorPaginationBase {}
 
 @JsonSerializable(
@@ -43,6 +45,7 @@ class CursorPagination<T> extends CursorPaginationBase {
 class CursorPaginationMeta {
   final int count;
   final bool hasMore;
+
   CursorPaginationMeta({
     required this.count,
     required this.hasMore,
@@ -62,7 +65,7 @@ class CursorPaginationMeta {
       _$CursorPaginationMetaFromJson(json);
 }
 
-// 새로고침 할 때
+// 새로고침 할때
 class CursorPaginationRefetching<T> extends CursorPagination<T> {
   CursorPaginationRefetching({
     required super.meta,
@@ -71,7 +74,7 @@ class CursorPaginationRefetching<T> extends CursorPagination<T> {
 }
 
 // 리스트의 맨 아래로 내려서
-// 추가 데이터를 요청하는 중
+// 추가 데이터를 요청하는중
 class CursorPaginationFetchingMore<T> extends CursorPagination<T> {
   CursorPaginationFetchingMore({
     required super.meta,

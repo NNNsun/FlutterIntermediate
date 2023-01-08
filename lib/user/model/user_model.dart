@@ -29,6 +29,7 @@ class UserModel extends UserModelBase {
     required this.username,
     required this.imageUrl,
   });
+
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);
 }

@@ -11,7 +11,6 @@ import 'package:retrofit/retrofit.dart';
 part 'restaurant_rating_repository.g.dart';
 
 final restaurantRatingRepositoryProvider =
-    //*fmaily를 받는 이유: 어떤 레스토랑(rid)에 요청을 할 건지 지정해야하기때문
     Provider.family<RestaurantRatingRepository, String>((ref, id) {
   final dio = ref.watch(dioProvider);
 
@@ -19,7 +18,7 @@ final restaurantRatingRepositoryProvider =
       baseUrl: 'http://$ip/restaurant/$id/rating');
 });
 
-// baseUrl = http://ip/restaurant/:rid/rating
+// http://ip/restaurant/:rid/rating
 @RestApi()
 abstract class RestaurantRatingRepository
     implements IBasePaginationRepository<RatingModel> {

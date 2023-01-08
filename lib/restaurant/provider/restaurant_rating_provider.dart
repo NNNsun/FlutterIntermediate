@@ -6,8 +6,7 @@ import 'package:infren/restaurant/repository/restaurant_rating_repository.dart';
 
 final restaurantRatingProvider = StateNotifierProvider.family<
     RestaurantRatingStateNotifier, CursorPaginationBase, String>((ref, id) {
-  final repo = ref.watch(restaurantRatingRepositoryProvider(
-      id)); //restaurantRatingRepositoryProvider: family로 생성되어 있음
+  final repo = ref.watch(restaurantRatingRepositoryProvider(id));
 
   return RestaurantRatingStateNotifier(repository: repo);
 });

@@ -6,8 +6,6 @@ import 'package:infren/restaurant/view/restaurant_detail__screen.dart';
 import 'package:go_router/go_router.dart';
 
 class RestaurantScreen extends StatelessWidget {
-  const RestaurantScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return PaginationListView(
@@ -15,9 +13,12 @@ class RestaurantScreen extends StatelessWidget {
       itemBuilder: <RestaurantModel>(_, index, model) {
         return GestureDetector(
           onTap: () {
-            context.goNamed(RestaurantDetailScreen.routeName, params: {
-              'rid': model.id,
-            });
+            context.goNamed(
+              RestaurantDetailScreen.routeName,
+              params: {
+                'rid': model.id,
+              },
+            );
           },
           child: RestaurantCard.fromModel(
             model: model,

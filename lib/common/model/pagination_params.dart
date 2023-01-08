@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'pagination_params.g.dart';
 
 // flutter pub run build_runner watch
+
 @JsonSerializable()
 class PaginationParams {
   final String? after;
@@ -13,7 +14,10 @@ class PaginationParams {
     this.count,
   });
 
-  PaginationParams copyWith({String? after, int? count}) {
+  PaginationParams copyWith({
+    String? after,
+    int? count,
+  }) {
     return PaginationParams(
       after: after ?? this.after,
       count: count ?? this.count,

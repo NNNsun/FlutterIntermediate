@@ -14,8 +14,10 @@ part 'restaurant_repository.g.dart';
 final restaurantRepositoryProvider = Provider<RestaurantRepository>(
   (ref) {
     final dio = ref.watch(dioProvider);
+
     final repository =
         RestaurantRepository(dio, baseUrl: 'http://$ip/restaurant');
+
     return repository;
   },
 );
@@ -32,12 +34,11 @@ abstract class RestaurantRepository
   @Headers({
     'accessToken': 'true',
   })
-  //after와 count가 없어도 첫번째 page를 가져오도록 api가 설계되어있음
   Future<CursorPagination<RestaurantModel>> paginate({
     @Queries() PaginationParams? paginationParams = const PaginationParams(),
   });
 
-  // http://$ip/restaurant/:id/
+  // http://$ip/restaurant/:id
   @GET('/{id}')
   @Headers({
     'accessToken': 'true',
