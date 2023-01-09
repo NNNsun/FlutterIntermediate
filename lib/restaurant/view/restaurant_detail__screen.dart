@@ -1,5 +1,7 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:infren/common/const/colors.dart';
 import 'package:infren/common/layout/default_layout.dart';
 import 'package:infren/common/model/cursor_pagination_model.dart';
 import 'package:infren/common/utils/pagination_utils.dart';
@@ -54,6 +56,7 @@ class _RestaurantDetailScreenState
   Widget build(BuildContext context) {
     final state = ref.watch(restaurantDetailProvider(widget.id));
     final ratingsState = ref.watch(restaurantRatingProvider(widget.id));
+    final basket = ref.watch(basketProvider);
 
     print(ratingsState);
 
@@ -67,6 +70,27 @@ class _RestaurantDetailScreenState
 
     return DefaultLayout(
       title: '불타는 떡볶이',
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: PRIMARY_COLOR,
+        child: Badge(
+          showBadge: basket.isNotEmpty,
+          badgeContent: Text(
+            basket
+                .fold(0, (previous, next) => previous + next.count)
+                .toString(),
+            style: TextStyle(
+              color: PRIMARY_COLOR,
+              fontSize: 10.0,
+            ),
+          ),
+          child: Icon(
+            Icons.shopping_bag_outlined,
+            color: Colors.white,
+          ),
+          badgeColor: Colors.white,
+        ),
+      ),
       child: CustomScrollView(
         controller: controller,
         slivers: [
@@ -152,7 +176,7 @@ class _RestaurantDetailScreenState
         delegate: SliverChildBuilderDelegate(
           (context, index) {
             final model = products[index];
-
+            // 보통 전환되지않는 클릭에 사용
             return InkWell(
               onTap: () {
                 ref.read(basketProvider.notifier).addToBasket(

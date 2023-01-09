@@ -11,5 +11,5 @@ final doitIp = '172.30.1.78:3000';
 final homeIp = '192.168.25.37:3000';
 final yuIP = '165.229.75.129:3000';
 
-final androidIp = doitIp;
+final androidIp = homeIp;
 final ip = Platform.isIOS ? simulatorIp : androidIp;
