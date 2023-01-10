@@ -102,7 +102,7 @@ class _PaginationListViewState<T extends IModelWithId>
               );
         },
         child: ListView.separated(
-          physics: AlwaysScrollableScrollPhysics(),
+          physics: AlwaysScrollableScrollPhysics(), // 리스트 길이와 상관없이 항상 스크롤 가능
           controller: controller,
           itemCount: cp.data.length + 1,
           itemBuilder: (_, index) {

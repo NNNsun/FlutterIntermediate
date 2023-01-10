@@ -5,7 +5,6 @@ part 'post_order_body.g.dart';
 
 @JsonSerializable()
 class PostOrderBody {
-  // 글로벌 유니크 값 => uuid
   final String id;
   final List<PostOrderBodyProduct> products;
   final int totalPrice;
@@ -20,6 +19,7 @@ class PostOrderBody {
 
   factory PostOrderBody.fromJson(Map<String, dynamic> json) =>
       _$PostOrderBodyFromJson(json);
+
   Map<String, dynamic> toJson() => _$PostOrderBodyToJson(this);
 }
 
@@ -32,6 +32,7 @@ class PostOrderBodyProduct {
     required this.productId,
     required this.count,
   });
+
   factory PostOrderBodyProduct.fromJson(Map<String, dynamic> json) =>
       _$PostOrderBodyProductFromJson(json);
 

@@ -5,6 +5,8 @@ import 'package:infren/product/view/product_screen.dart';
 import 'package:infren/restaurant/view/restaurant_screen.dart';
 import 'package:infren/user/view/profile_screen.dart';
 
+import '../../order/view/order_screen.dart';
+
 class RootTab extends StatefulWidget {
   static String get routeName => 'home';
 
@@ -23,7 +25,7 @@ class _RootTabState extends State<RootTab> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
 
-    controller = TabController(length: 3, vsync: this);
+    controller = TabController(length: 4, vsync: this);
 
     controller.addListener(tabListener);
   }
@@ -51,7 +53,7 @@ class _RootTabState extends State<RootTab> with SingleTickerProviderStateMixin {
         children: [
           RestaurantScreen(),
           ProductScreen(),
-          //OrderScreen(),
+          OrderScreen(),
           ProfileScreen(),
         ],
       ),
@@ -74,10 +76,10 @@ class _RootTabState extends State<RootTab> with SingleTickerProviderStateMixin {
             icon: Icon(Icons.fastfood_outlined),
             label: '음식',
           ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.receipt_long_outlined),
-          //   label: '주문',
-          // ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.receipt_long_outlined),
+            label: '주문',
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_outlined),
             label: '프로필',
