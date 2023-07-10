@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:go_router/go_router.dart';
 import 'package:infren/common/view/root_tab.dart';
 import 'package:infren/order/view/order_done_screen.dart';
@@ -32,7 +31,7 @@ class AuthProvider extends ChangeNotifier {
         GoRoute(
           path: '/',
           name: RootTab.routeName,
-          builder: (_, __) => RootTab(),
+          builder: (_, __) => const RootTab(),
           routes: [
             GoRoute(
               path: 'restaurant/:rid',
@@ -46,22 +45,22 @@ class AuthProvider extends ChangeNotifier {
         GoRoute(
           path: '/basket',
           name: BasketScreen.routeName,
-          builder: (_, state) => BasketScreen(),
+          builder: (_, state) => const BasketScreen(),
         ),
         GoRoute(
           path: '/order_done',
           name: OrderDoneScreen.routeName,
-          builder: (_, state) => OrderDoneScreen(),
+          builder: (_, state) => const OrderDoneScreen(),
         ),
         GoRoute(
           path: '/splash',
           name: SplashScreen.routeName,
-          builder: (_, __) => SplashScreen(),
+          builder: (_, __) => const SplashScreen(),
         ),
         GoRoute(
           path: '/login',
           name: LoginScreen.routeName,
-          builder: (_, __) => LoginScreen(),
+          builder: (_, __) => const LoginScreen(),
         ),
       ];
 
@@ -71,8 +70,8 @@ class AuthProvider extends ChangeNotifier {
 
   // SplashScreen
   // 앱을 처음 시작했을때
-  // 토큰이 존재하는지 확인하고
-  // 로그인 스크린으로 보내줄지
+  // 토큰이 존재하는지 확인하고(자동로그인은 토큰이 없어도 토큰을 발급받게된다)
+  // 로그인 스크린으로 보내줄지(토큰이 없으면서 다른 무언가도 없을때 보내야한다)
   // 홈 스크린으로 보내줄지 확인하는 과정이 필요하다.
   String? redirectLogic(BuildContext context, GoRouterState state) {
     //FlutterSecureStorage().deleteAll();

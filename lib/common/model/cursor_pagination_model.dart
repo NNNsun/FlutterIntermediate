@@ -19,7 +19,7 @@ class CursorPaginationLoading extends CursorPaginationBase {}
 )
 class CursorPagination<T> extends CursorPaginationBase {
   final CursorPaginationMeta meta;
-  final List<T> data;
+  final List<T> data; // T = model ex List<RestaurantModel>
 
   CursorPagination({
     required this.meta,

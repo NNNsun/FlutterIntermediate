@@ -6,6 +6,8 @@ import 'package:infren/restaurant/view/restaurant_detail__screen.dart';
 import 'package:go_router/go_router.dart';
 
 class RestaurantScreen extends StatelessWidget {
+  const RestaurantScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return PaginationListView(

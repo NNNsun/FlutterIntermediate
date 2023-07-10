@@ -6,6 +6,7 @@ import 'package:infren/common/model/login_response.dart';
 import 'package:infren/common/model/token_response.dart';
 import 'package:infren/common/utils/data_utils.dart';
 
+// AuthRepository를 provider에 연결
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
   final dio = ref.watch(dioProvider);
 

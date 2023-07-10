@@ -17,7 +17,7 @@ class OrderDoneScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
+            const Icon(
               Icons.thumb_up_alt_outlined,
               color: PRIMARY_COLOR,
               size: 50.0,
@@ -25,7 +25,7 @@ class OrderDoneScreen extends StatelessWidget {
             const SizedBox(
               height: 32.0,
             ),
-            Text(
+            const Text(
               '결제가 완료되었습니다.',
               textAlign: TextAlign.center,
             ),
@@ -39,7 +39,7 @@ class OrderDoneScreen extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: PRIMARY_COLOR,
               ),
-              child: Text('홈으로'),
+              child: const Text('홈으로'),
             ),
           ],
         ),

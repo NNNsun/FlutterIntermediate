@@ -2,8 +2,6 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'pagination_params.g.dart';
 
-// flutter pub run build_runner watch
-
 @JsonSerializable()
 class PaginationParams {
   final String? after;

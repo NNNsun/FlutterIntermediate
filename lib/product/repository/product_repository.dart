@@ -23,6 +23,7 @@ abstract class ProductRepository
     implements IBasePaginationRepository<ProductModel> {
   factory ProductRepository(Dio dio, {String baseUrl}) = _ProductRepository;
 
+  @override
   @GET('/')
   @Headers({
     'accessToken': 'true',

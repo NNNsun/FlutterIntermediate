@@ -4,6 +4,8 @@ import 'package:infren/common/const/colors.dart';
 import 'package:infren/common/layout/default_layout.dart';
 
 class SplashScreen extends ConsumerWidget {
+  const SplashScreen({super.key});
+
   static String get routeName => 'splash';
 
   @override
@@ -20,7 +22,7 @@ class SplashScreen extends ConsumerWidget {
               width: MediaQuery.of(context).size.width / 2,
             ),
             const SizedBox(height: 16.0),
-            CircularProgressIndicator(
+            const CircularProgressIndicator(
               color: Colors.white,
             ),
           ],

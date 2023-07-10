@@ -16,7 +16,7 @@ class BasketScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final basket = ref.watch(basketProvider);
     if (basket.isEmpty) {
-      return DefaultLayout(
+      return const DefaultLayout(
         title: '장바구니',
         child: Center(
           child: Text(
@@ -45,7 +45,7 @@ class BasketScreen extends ConsumerWidget {
               Expanded(
                 child: ListView.separated(
                   separatorBuilder: (_, index) {
-                    return Divider(
+                    return const Divider(
                       height: 32.0,
                     );
                   },
@@ -73,44 +73,44 @@ class BasketScreen extends ConsumerWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         '장바구니 금액',
                         style: TextStyle(
                           color: BODY_TEXT_COLOR,
                         ),
                       ),
                       Text(
-                        '￦' + productsTotal.toString(),
+                        '￦$productsTotal',
                       ),
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         '배달비',
                         style: TextStyle(
                           color: BODY_TEXT_COLOR,
                         ),
                       ),
-                      if (basket.length > 0)
+                      if (basket.isNotEmpty)
                         Text(
-                          '￦' + deliveryFee.toString(),
+                          '￦$deliveryFee',
                         )
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         '총액',
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      if (basket.length > 0)
+                      if (basket.isNotEmpty)
                         Text(
-                          '￦' + (deliveryFee + productsTotal).toString(),
+                          '￦${deliveryFee + productsTotal}',
                         ),
                     ],
                   ),
@@ -126,7 +126,7 @@ class BasketScreen extends ConsumerWidget {
                             context.goNamed(OrderDoneScreen.routeName);
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
+                              const SnackBar(
                                 content: Text('결제실패!'),
                               ),
                             );
@@ -134,7 +134,7 @@ class BasketScreen extends ConsumerWidget {
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: PRIMARY_COLOR),
-                        child: Text(
+                        child: const Text(
                           '결제하기',
                         )),
                   )

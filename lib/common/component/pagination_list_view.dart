@@ -57,7 +57,7 @@ class _PaginationListViewState<T extends IModelWithId>
 
     // 완전 처음 로딩일때
     if (state is CursorPaginationLoading) {
-      return Center(
+      return const Center(
         child: CircularProgressIndicator(),
       );
     }
@@ -79,7 +79,7 @@ class _PaginationListViewState<T extends IModelWithId>
                     forceRefetch: true,
                   );
             },
-            child: Text(
+            child: const Text(
               '다시시도',
             ),
           ),
@@ -102,7 +102,8 @@ class _PaginationListViewState<T extends IModelWithId>
               );
         },
         child: ListView.separated(
-          physics: AlwaysScrollableScrollPhysics(), // 리스트 길이와 상관없이 항상 스크롤 가능
+          physics:
+              const AlwaysScrollableScrollPhysics(), // 리스트 길이와 상관없이 항상 스크롤 가능
           controller: controller,
           itemCount: cp.data.length + 1,
           itemBuilder: (_, index) {
@@ -114,8 +115,8 @@ class _PaginationListViewState<T extends IModelWithId>
                 ),
                 child: Center(
                   child: cp is CursorPaginationFetchingMore
-                      ? CircularProgressIndicator()
-                      : Text('마지막 데이터입니다 ㅠㅠ'),
+                      ? const CircularProgressIndicator()
+                      : const Text('마지막 데이터입니다 ㅠㅠ'),
                 ),
               );
             }
@@ -129,7 +130,7 @@ class _PaginationListViewState<T extends IModelWithId>
             );
           },
           separatorBuilder: (_, index) {
-            return SizedBox(height: 16.0);
+            return const SizedBox(height: 16.0);
           },
         ),
       ),

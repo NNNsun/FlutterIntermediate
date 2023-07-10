@@ -83,14 +83,14 @@ class ProductCard extends ConsumerWidget {
                   children: [
                     Text(
                       name,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 18.0, fontWeight: FontWeight.w500),
                     ),
                     Text(
                       detail,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: BODY_TEXT_COLOR,
                         fontSize: 14.0,
                       ),
@@ -98,7 +98,7 @@ class ProductCard extends ConsumerWidget {
                     Text(
                       '￦$price',
                       textAlign: TextAlign.end,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: PRIMARY_COLOR,
                         fontSize: 12.0,
                         fontWeight: FontWeight.w500,
@@ -141,7 +141,6 @@ class _Footer extends StatelessWidget {
     required this.count,
     required this.onSubtract,
     required this.onAdd,
-    super.key,
   });
 
   @override
@@ -151,7 +150,7 @@ class _Footer extends StatelessWidget {
         Expanded(
           child: Text(
             '총액 ₩$total',
-            style: TextStyle(
+            style: const TextStyle(
               color: PRIMARY_COLOR,
               fontWeight: FontWeight.w500,
             ),
@@ -166,7 +165,7 @@ class _Footer extends StatelessWidget {
             ),
             Text(
               count.toString(),
-              style: TextStyle(
+              style: const TextStyle(
                 color: PRIMARY_COLOR,
                 fontWeight: FontWeight.w500,
               ),

@@ -31,7 +31,7 @@ class OrderStateNotifier
 
   Future<bool> postOrder() async {
     try {
-      final uuid = Uuid();
+      const uuid = Uuid();
 
       final id = uuid.v4();
 

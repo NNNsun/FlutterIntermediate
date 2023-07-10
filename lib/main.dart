@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:infren/common/provider/go_router.dart';
 
+import 'log/provider_logger.dart';
+
 void main() {
   runApp(ProviderScope(
-    child: _App(),
+    observers: [
+      ProviderLogger(),
+    ],
+    child: const _App(),
   ));
 }
 

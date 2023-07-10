@@ -12,6 +12,7 @@ enum RestaurantPriceRange {
 
 @JsonSerializable()
 class RestaurantModel implements IModelWithId {
+  @override
   final String id;
   final String name;
   @JsonKey(

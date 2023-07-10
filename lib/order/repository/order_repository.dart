@@ -25,6 +25,7 @@ abstract class OrderRepository
     implements IBasePaginationRepository<OrderModel> {
   factory OrderRepository(Dio dio, {String baseUrl}) = _OrderRepository;
 
+  @override
   @GET('/')
   @Headers({
     'accessToken': 'true',

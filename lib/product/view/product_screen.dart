@@ -19,12 +19,12 @@ class ProductScreen extends StatelessWidget {
               context.goNamed(RestaurantDetailScreen.routeName, params: {
                 'rid': model.restaurant.id,
               });
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(
-              //     builder: (_) =>
-              //         RestaurantDetailScreen(id: model.restaurant.id),
-              //   ),
-              // );
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) =>
+                      RestaurantDetailScreen(id: model.restaurant.id),
+                ),
+              );
             },
             child: ProductCard.fromProductModel(model: model));
       },

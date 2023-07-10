@@ -35,7 +35,7 @@ class PaginationProvider<T extends IModelWithId,
       // 4) CursorPaginationRefetching - 첫번째 페이지부터 다시 데이터를 가져올때
       // 5) CursorPaginationFetchMore - 추가 데이터를 paginate 해오라는 요청을 받았을 때
 
-      // 바로 반환하는 상황
+      // 바로 반환하는 상황1
       // 1) hasMore == false (기존 상태에서 이미 다음 데이터가 없다는 값을 들고있다면)
       if (state is CursorPagination && !forceRefetch) {
         final pState = state as CursorPagination; // 무조건 CursorPagination이라고 공표!

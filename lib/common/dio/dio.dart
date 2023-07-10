@@ -82,7 +82,8 @@ class CustomInterceptor extends Interceptor {
     // 토큰을 재발급 받는 시도를하고 토큰이 재발급되면
     // 다시 새로운 토큰으로 요청을한다.
     print('[ERR] [${err.requestOptions.method}] ${err.requestOptions.uri}');
-
+    print(
+        '[ERR] [${err.requestOptions.data}]  [${err.requestOptions.queryParameters}]');
     final refreshToken = await storage.read(key: REFRESH_TOKEN_KEY);
 
     // refreshToken 아예 없으면
@@ -91,7 +92,6 @@ class CustomInterceptor extends Interceptor {
       // 에러를 던질때는 handler.reject를 사용한다.
       return handler.reject(err);
     }
-
     final isStatus401 = err.response?.statusCode == 401;
     final isPathRefresh = err.requestOptions.path == '/auth/token';
 

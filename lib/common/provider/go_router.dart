@@ -12,5 +12,6 @@ final routerProvider = Provider<GoRouter>((ref) {
     initialLocation: '/splash',
     refreshListenable: provider,
     redirect: provider.redirectLogic,
+    debugLogDiagnostics: true,
   );
 });

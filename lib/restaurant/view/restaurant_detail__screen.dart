@@ -1,4 +1,3 @@
-import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -63,7 +62,7 @@ class _RestaurantDetailScreenState
     print(ratingsState);
 
     if (state == null) {
-      return DefaultLayout(
+      return const DefaultLayout(
         child: Center(
           child: CircularProgressIndicator(),
         ),
@@ -77,22 +76,9 @@ class _RestaurantDetailScreenState
           context.pushNamed(BasketScreen.routeName);
         },
         backgroundColor: PRIMARY_COLOR,
-        child: Badge(
-          showBadge: basket.isNotEmpty,
-          badgeContent: Text(
-            basket
-                .fold(0, (previous, next) => previous + next.count)
-                .toString(),
-            style: TextStyle(
-              color: PRIMARY_COLOR,
-              fontSize: 10.0,
-            ),
-          ),
-          child: Icon(
-            Icons.shopping_bag_outlined,
-            color: Colors.white,
-          ),
-          badgeColor: Colors.white,
+        child: const Icon(
+          Icons.shopping_bag_outlined,
+          color: Colors.white,
         ),
       ),
       child: CustomScrollView(
@@ -121,7 +107,7 @@ class _RestaurantDetailScreenState
     required List<RatingModel> models,
   }) {
     return SliverPadding(
-      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
       sliver: SliverList(
         delegate: SliverChildBuilderDelegate(
           (_, index) => Padding(
@@ -138,7 +124,7 @@ class _RestaurantDetailScreenState
 
   SliverPadding renderLoading() {
     return SliverPadding(
-      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
       sliver: SliverList(
         delegate: SliverChildListDelegate(
           List.generate(
@@ -146,7 +132,7 @@ class _RestaurantDetailScreenState
             (index) => Padding(
               padding: const EdgeInsets.only(bottom: 32.0),
               child: SkeletonParagraph(
-                style: SkeletonParagraphStyle(
+                style: const SkeletonParagraphStyle(
                   lines: 5,
                   padding: EdgeInsets.zero,
                 ),
@@ -159,7 +145,7 @@ class _RestaurantDetailScreenState
   }
 
   SliverPadding renderLabel() {
-    return SliverPadding(
+    return const SliverPadding(
       padding: EdgeInsets.symmetric(horizontal: 16.0),
       sliver: SliverToBoxAdapter(
         child: Text(
@@ -175,7 +161,7 @@ class _RestaurantDetailScreenState
     required List<RestaurantProductModel> products,
   }) {
     return SliverPadding(
-      padding: EdgeInsets.symmetric(horizontal: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
       sliver: SliverList(
         delegate: SliverChildBuilderDelegate(
           (context, index) {
